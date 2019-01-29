@@ -1,0 +1,9 @@
+﻿exit = exit
+ls = List the Google Drive Files with the ids
+clear = Clears the CLI
+download = args: "filename"
+umodel = Upload a model to a predefined models folder args: "model path" **NO SPACES**
+ump3 = Upload an mp3 to Music. args:"Path to Music" **Probably should never be using an mp3**
+res = **Broken**
+settings = prints out current settings from config file
+auto = automically scans the Google Drive and downloads files to their correct folders
