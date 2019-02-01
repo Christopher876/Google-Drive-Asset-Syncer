@@ -86,7 +86,11 @@ namespace Google_Drive
 					googleFile[i].fileID = file.Id;
 					googleFile[i].parent = file.Parents;
 
-					if(c == 1) Console.WriteLine("{0} ({1})", file.Name, file.Id);
+					if (c == 1)
+					{
+						if(file.Parents != null) Console.WriteLine("{0} ({1}) Parent={2}", file.Name, file.Id, file.Parents[0]);
+						else Console.WriteLine("{0} ({1})", file.Name, file.Id);
+					}
 					i++;
 				}
 			}
@@ -133,9 +137,16 @@ namespace Google_Drive
 			Console.WriteLine("Downloading Model Files...");
 			for (int i = 0; i < googleFiles.Length; i++)
 			{
-				if (!modelFilenames.Contains(googleFiles[i].filename) && googleFiles[i].filename.CompareExtension(".fbx"))
+				try
 				{
-					DownloadFile(googleFiles[i].fileID, @"Assets/Models/" + googleFiles[i].filename);
+					if (!modelFilenames.Contains(googleFiles[i].filename) && googleFiles[i].filename.CompareExtension(".fbx") && googleFiles[i].parent[0] == Program.config.Current_Project_Models_ID)
+					{
+						DownloadFile(googleFiles[i].fileID, @"Assets/Models/" + googleFiles[i].filename);
+					}
+				}
+				catch(Exception e)
+				{
+					continue;
 				}
 			}
 
@@ -143,18 +154,32 @@ namespace Google_Drive
 			Console.WriteLine("Downloading Audio Files...");
 			for (int i = 0; i < googleFiles.Length; i++)
 			{
-				if (!audioFilenames.Contains(googleFiles[i].filename) && googleFiles[i].filename.CompareExtension(".wav"))
+				try
 				{
-					DownloadFile(googleFiles[i].fileID, @"Assets/Audio/" + googleFiles[i].filename);
+					if (!audioFilenames.Contains(googleFiles[i].filename) && googleFiles[i].filename.CompareExtension(".wav") && googleFiles[i].parent[0] == Program.config.Current_Project_Audio_ID)
+					{
+						DownloadFile(googleFiles[i].fileID, @"Assets/Audio/" + googleFiles[i].filename);
+					}
+				}
+				catch(Exception e)
+				{
+					continue;
 				}
 			}
 
 			Console.WriteLine("Downloading Music Files...");
 			for (int i = 0; i < googleFiles.Length; i++)
 			{
-				if (!musicFilenames.Contains(googleFiles[i].filename) && (googleFiles[i].filename.CompareExtension(".wav") || googleFiles[i].filename.CompareExtension(".flac")))
+				try
 				{
-					DownloadFile(googleFiles[i].fileID, @"Assets/Music/" + googleFiles[i].filename);
+					if (!musicFilenames.Contains(googleFiles[i].filename) && googleFiles[i].parent[0] == Program.config.Current_Project_Music_ID && (googleFiles[i].filename.CompareExtension(".wav") || googleFiles[i].filename.CompareExtension(".flac")))
+					{
+						DownloadFile(googleFiles[i].fileID, @"Assets/Music/" + googleFiles[i].filename);
+					}
+				}
+				catch(Exception e)
+				{
+					continue;
 				}
 			}
 			#endregion

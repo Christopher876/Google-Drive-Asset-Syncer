@@ -10,6 +10,13 @@ namespace Google_Drive
 		string Current_Project_Models_ID { get; }
 		string Current_Project_Audio_ID { get; }
 		string Current_Project_Music_ID { get; }
+		string Unity_Directory { get; }
+
+		[Option(DefaultValue = false)]
+		bool Auto_Launch_Unity { get; }
+		[Option(DefaultValue = false)]
+		bool Auto_Launch { get; }
+
 		string Test { get; set; }
 	}
 }

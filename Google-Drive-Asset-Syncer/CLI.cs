@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -15,6 +16,14 @@ namespace Google_Drive
 		{
 			drive = new Drive();
 			googleFile = drive.ListFiles(0);
+			//if auto launch is on 
+			//downloads the new assets and then launches the unity hub/unity editor
+			if (Program.config.Auto_Launch)
+			{
+				drive.AutoDownload(googleFile);
+				if(Program.config.Auto_Launch_Unity) Process.Start(Program.config.Unity_Directory); //Starts up the Unity Hub
+				Environment.Exit(0);
+			}
 			while (true)
 			{
 				Console.Write("> ");
