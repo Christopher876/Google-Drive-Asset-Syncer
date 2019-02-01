@@ -24,3 +24,10 @@ Unity_Directory = **Path Unity Hub or Unity for the program to auto launch Unity
 ![alt text](https://github.com/Christopher876/Google-Drive-Asset-Syncer/blob/master/Images/asset_fetcher_screenshot.PNG "Console Image")
 Look for what file is the parent to the file that you want. In my case, I want the "zombie.fbx" folder, so I look for the zombie's parent folder and then that parent folder. Once I found that yes, that is the folder I want, I copy that ID to the "Current_Project_models_ID" config section.
 - After this, you're all set to use the program.
+
+# TO-DO:
+- Background schedule tasks
+- Notifications for new files
+- Check for a new version of the same file
+- Automatically do the ID settings without having to manually go trhough and check for the parents
+- Sync deleted files with confirmation and a config option
