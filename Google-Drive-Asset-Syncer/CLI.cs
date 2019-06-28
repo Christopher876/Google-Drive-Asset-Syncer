@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 
 namespace Google_Drive
 {
@@ -102,6 +103,13 @@ namespace Google_Drive
 
 				case "auto":
 					drive.AutoDownload(googleFile);
+					break;
+
+				case "notify":
+					new Thread(() =>
+					{
+						Notifications.NativeTest.NotifyService("Tweedle", "Batman's Tweedle decides that he does not want to be Batman's Panty anymore! Though shall not be a Batman Panty ever again.");
+					}).Start();
 					break;
 
 				default:

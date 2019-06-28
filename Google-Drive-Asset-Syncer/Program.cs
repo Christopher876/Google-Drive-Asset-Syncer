@@ -21,16 +21,34 @@ namespace Google_Drive
 		public static Configuration config;
 		static void Setup()
 		{
-			Program.config = new ConfigurationBuilder<Configuration>()
+			config = new ConfigurationBuilder<Configuration>()
 				.UseIniFile("config.ini")
-				.Build();
+				.Build();			
+			
+			//Check for folders and create the ones that does not exist
+			List<string> folders = new List<string>();
+			folders.Add("Models");
+			folders.Add("Music");
+			folders.Add("Audio");
+			folders.Add("Textures");
+
+			foreach(string folder in folders)
+			{
+				if (!Directory.Exists("Assets/" + folder))
+				{
+					Directory.CreateDirectory(folder);
+					Console.WriteLine("Created " + folder + " folder");
+				}
+			}
 		}
 
 		static void Main(string[] args)
 		{
-			Setup();
-			Drive drive = new Google_Drive.Drive();
-			CLI cli = new CLI();
+			Notifications notifications = new Notifications();
+
+			//Setup();
+			//Drive drive = new Drive();
+			//CLI cli = new CLI();
 			Console.Read();
 		}
 	}
